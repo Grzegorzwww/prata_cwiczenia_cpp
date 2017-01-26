@@ -1,0 +1,34 @@
+# depslib dependency file v1.0
+1473143387 source:/home/gwarchol/codeblock_workspace/prata_test/complex0.cpp
+	<iostream>
+	"complex0.h"
+
+1473147758 /home/gwarchol/codeblock_workspace/prata_test/complex0.h
+	<iostream>
+
+1484827757 source:/home/gwarchol/codeblock_workspace/prata_test/main.cpp
+	<iostream>
+	<ctime>
+	<cstdlib>
+	"complex0.h"
+	"mystring.h"
+	"queue.h"
+	"valarray"
+	"string"
+
+1474630471 /home/gwarchol/codeblock_workspace/prata_test/mystring.h
+	<iostream>
+	<cstring>
+	<cctype>
+
+1474626340 source:/home/gwarchol/codeblock_workspace/prata_test/mystring.cpp
+	"mystring.h"
+
+1474278856 /home/gwarchol/codeblock_workspace/prata_test/queue.h
+	<iostream>
+	<ctime>
+	<cstdlib>
+
+1474278653 source:/home/gwarchol/codeblock_workspace/prata_test/queue.cpp
+	"queue.h"
+
