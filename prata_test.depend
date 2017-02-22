@@ -32,3 +32,33 @@
 1474278653 source:/home/gwarchol/codeblock_workspace/prata_test/queue.cpp
 	"queue.h"
 
+1486383365 source:/home/gwarchol/codeblocks_workspace/cwiczenia_prata/complex0.cpp
+	<iostream>
+	"complex0.h"
+
+1486383365 /home/gwarchol/codeblocks_workspace/cwiczenia_prata/complex0.h
+	<iostream>
+
+1486383365 source:/home/gwarchol/codeblocks_workspace/cwiczenia_prata/mystring.cpp
+	"mystring.h"
+
+1486383365 /home/gwarchol/codeblocks_workspace/cwiczenia_prata/mystring.h
+	<iostream>
+	<cstring>
+	<cctype>
+
+1486385103 source:/home/gwarchol/codeblocks_workspace/cwiczenia_prata/main.cpp
+	<iostream>
+	<ctime>
+	<cstdlib>
+	"complex0.h"
+	"mystring.h"
+	"queue.h"
+	"valarray"
+	"string"
+
+1486383365 /home/gwarchol/codeblocks_workspace/cwiczenia_prata/queue.h
+	<iostream>
+	<ctime>
+	<cstdlib>
+

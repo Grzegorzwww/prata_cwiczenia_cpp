@@ -12,6 +12,7 @@ using namespace std;
 
 
 template <class T1, class T2>
+
 class Pair
 {
     private:
@@ -24,9 +25,7 @@ class Pair
     T2 second() const {return b;}
     Pair(const T1 & aval, const T2 &bval) : a(aval), b(bval) {}
     Pair() {}
-
 };
-
 
 template <class T1, class T2>
 T1 & Pair<T1, T2>::first()
@@ -39,6 +38,63 @@ T2 & Pair<T1, T2>::second()
 {
     return b;
 }
+
+typedef valarray<int> ArrayInt;
+typedef Pair<ArrayInt, ArrayInt> PairArray;
+
+
+
+class Wine: private std::string, private PairArray
+{
+    private:
+    enum {MAX_BOTTLE = 5};
+    //char  *nazwa;
+   // PairArray dane[5];
+    int liczba_rocznikow;
+
+
+    public:
+
+    Wine();
+    Wine(const char *l, int y,const int yr[], const int bot[]);
+    Wine(const char *l, int y);
+    void GetBottels();
+   // char & Label() const {return *nazwa;}
+    int sum() ;
+
+};
+
+
+
+Wine::Wine() : liczba_rocznikow(1), std::string("brak nazwy"), PairArray()
+{
+
+}
+
+Wine::Wine(const char *l, int y,const int yr[], const int bot[]) : liczba_rocznikow(y),  std::string(l)
+{
+   for(int i = 0; i < y; i++)
+    {
+        PairArray::a[i] = yr[i];
+        PairArray::b[i] = bot[i];
+    }
+
+}
+
+
+
+
+
+int main()
+{
+
+
+}
+
+
+/*
+
+
 
 
 
@@ -123,8 +179,7 @@ void Wine::GetBottels(){
 }
 
 int Wine::sum()  {
-    return dane->second().sum;
-
+    return 1;
 }
 
 
