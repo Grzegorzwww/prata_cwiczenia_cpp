@@ -19,6 +19,9 @@ class Pair
     T1 a;
     T2 b;
     public:
+
+    void addFirst(const  T1 &aval) { a = aval;}
+    void addSecond(const  T2 &bval) { b = bval;}
     T1 & first();
     T2 & second();
     T1 first() const {return a;}
@@ -61,6 +64,7 @@ class Wine: private std::string, private PairArray
     void GetBottels();
    // char & Label() const {return *nazwa;}
     int sum() ;
+    void show();
 
 };
 
@@ -71,12 +75,40 @@ Wine::Wine() : liczba_rocznikow(1), std::string("brak nazwy"), PairArray()
 
 }
 
-Wine::Wine(const char *l, int y,const int yr[], const int bot[]) : liczba_rocznikow(y),  std::string(l)
+Wine::Wine(const char *l, int y,const int yr[], const int bot[]) : liczba_rocznikow(y),  std::string(l), PairArray(ArrayInt(yr,y), ArrayInt(bot, y))
 {
-   for(int i = 0; i < y; i++)
-    {
-        PairArray::a[i] = yr[i];
-        PairArray::b[i] = bot[i];
+
+}
+
+Wine::Wine(const char *l, int y) : std::string(l), liczba_rocznikow(y), PairArray(ArrayInt(0,y), ArrayInt(0, y))
+{
+
+
+}
+void Wine::GetBottels(){
+    int bottels_counter = 0;
+    int temp_val = 0;;
+    while(bottels_counter < liczba_rocznikow){
+        cout << "Wino: "<< (const string &) *this <<",  prosze podac rocznik: ";
+        cin >> temp_val;
+
+       PairArray::first()[bottels_counter ] = temp_val;
+
+        cout << "Wino: "<< (const string &) *this<<",  prosze podac ilosc butelek: ";
+        cin >> temp_val;
+        PairArray::second()[bottels_counter ]  = temp_val;
+
+        bottels_counter++;
+        }
+}
+
+void Wine::show(){
+
+    for(int i = 0; i < liczba_rocznikow; i++){
+        cout << "Wino: "<< (const string &) *this <<": ";
+        cout << ", rocznik  - " << PairArray::first()[i];
+        cout << ", ilosc - " << PairArray::second()[i]<<endl;
+
     }
 
 }
@@ -88,7 +120,18 @@ Wine::Wine(const char *l, int y,const int yr[], const int bot[]) : liczba_roczni
 int main()
 {
 
+    cout <<"Podaj nazwe wina: ";
+    char lab[50];
+    cin.getline(lab, 50);
 
+    cout <<"Podaj liczbe rocznikow: ";
+    int yrs;
+    cin >> yrs;
+
+    Wine holding(lab, yrs);
+
+    holding.GetBottels();
+    holding.show();
 }
 
 
