@@ -11,128 +11,142 @@ using namespace std;
 
 
 
-template <class T1, class T2>
 
-class Pair
+
+
+class Worker
 {
-    private:
-    T1 a;
-    T2 b;
-    public:
+private:
+    string fullname;
+    long id;
+    protected:
+    void Data() const;
+    void Get();
 
-    void addFirst(const  T1 &aval) { a = aval;}
-    void addSecond(const  T2 &bval) { b = bval;}
-    T1 & first();
-    T2 & second();
-    T1 first() const {return a;}
-    T2 second() const {return b;}
-    Pair(const T1 & aval, const T2 &bval) : a(aval), b(bval) {}
-    Pair() {}
-};
-
-template <class T1, class T2>
-T1 & Pair<T1, T2>::first()
-{
-    return a;
-}
-
-template <class T1, class T2>
-T2 & Pair<T1, T2>::second()
-{
-    return b;
-}
-
-typedef valarray<int> ArrayInt;
-typedef Pair<ArrayInt, ArrayInt> PairArray;
-
-
-
-class Wine: private std::string, private PairArray
-{
-    private:
-    enum {MAX_BOTTLE = 5};
-    //char  *nazwa;
-   // PairArray dane[5];
-    int liczba_rocznikow;
-
-
-    public:
-
-    Wine();
-    Wine(const char *l, int y,const int yr[], const int bot[]);
-    Wine(const char *l, int y);
-    void GetBottels();
-   // char & Label() const {return *nazwa;}
-    int sum() ;
-    void show();
+public:
+    Worker() : fullname("brak"), id(0L) {}
+    Worker(const string & s, long n) :fullname(s), id(n) {}
+    virtual ~Worker() ;
+    virtual void Set();
+    virtual void Show();
 
 };
 
 
-
-Wine::Wine() : liczba_rocznikow(1), std::string("brak nazwy"), PairArray()
+template < class T >
+class QueueTp
 {
 
-}
+private:
 
-Wine::Wine(const char *l, int y,const int yr[], const int bot[]) : liczba_rocznikow(y),  std::string(l), PairArray(ArrayInt(yr,y), ArrayInt(bot, y))
-{
-
-}
-
-Wine::Wine(const char *l, int y) : std::string(l), liczba_rocznikow(y), PairArray(ArrayInt(0,y), ArrayInt(0, y))
-{
+    enum {MAX_SIZE = 10};
+    T *items;
+    int queue_item_counter;
 
 
-}
-void Wine::GetBottels(){
-    int bottels_counter = 0;
-    int temp_val = 0;;
-    while(bottels_counter < liczba_rocznikow){
-        cout << "Wino: "<< (const string &) *this <<",  prosze podac rocznik: ";
-        cin >> temp_val;
+public:
+    QueueTp();
+    ~QueueTp() {};
 
-       PairArray::first()[bottels_counter ] = temp_val;
+    bool isempty(){  return queue_item_counter == 0; }
+    bool isfull() { return   queue_item_counter== MAX_SIZE; }
+    bool push(const T & item);
+    bool pop(T & item);
 
-        cout << "Wino: "<< (const string &) *this<<",  prosze podac ilosc butelek: ";
-        cin >> temp_val;
-        PairArray::second()[bottels_counter ]  = temp_val;
-
-        bottels_counter++;
-        }
-}
-
-void Wine::show(){
-
-    for(int i = 0; i < liczba_rocznikow; i++){
-        cout << "Wino: "<< (const string &) *this <<": ";
-        cout << ", rocznik  - " << PairArray::first()[i];
-        cout << ", ilosc - " << PairArray::second()[i]<<endl;
-
-    }
-
-}
-
-
-
-
+};
 
 int main()
 {
 
-    cout <<"Podaj nazwe wina: ";
-    char lab[50];
-    cin.getline(lab, 50);
+     QueueTp < Worker> pracownicy;
+    cout <<   "pracownicy.isempty() = " <<   pracownicy.isempty()<<endl;
+    pracownicy.push(Worker("kot", 1));
+    pracownicy.push(Worker("pies", 2));
+    pracownicy.push(Worker("pies", 3));
+    cout <<   "pracownicy.isempty() = " <<   pracownicy.isempty()<<endl;
 
-    cout <<"Podaj liczbe rocznikow: ";
-    int yrs;
-    cin >> yrs;
+    Worker temp;
 
-    Wine holding(lab, yrs);
+    pracownicy.pop(temp);
+    temp.Show();
+     pracownicy.pop(temp);
+    temp.Show();
+     pracownicy.pop(temp);
+    temp.Show();
+     pracownicy.pop(temp);
+    temp.Show();
 
-    holding.GetBottels();
-    holding.show();
+
+    return 0;
 }
+
+
+
+
+
+
+
+template < class T >
+QueueTp<T>::QueueTp(){
+    queue_item_counter = 0;
+    items = new T[MAX_SIZE];
+    cout << "konstruktor";
+}
+
+
+template < class T >
+bool QueueTp<T>::push(const T & item){
+    items[++queue_item_counter] = item;
+
+}
+template < class T >
+bool QueueTp<T>::pop( T & item){
+   item = items[queue_item_counter--];
+   return true;
+}
+
+Worker::~Worker() {}
+
+
+void Worker::Data() const
+{
+    cout <<"Imie i naziwsko: "<<fullname<<"\n";
+    cout <<"Numer identyfikacyjny: "<<id<<"\n";
+
+}
+
+void Worker::Get() {
+
+    getline(cin, fullname);
+    cout << "Podaj numer identyfikacyjny pracownika: ";
+    cin >> id;
+    while(cin.get() != '\n')
+        continue;
+
+}
+
+void Worker::Set()
+{
+    cout << "Podaj imie i nazwisko pracownika: ";
+    getline(cin, fullname);
+    cout << "Podaj numer identyfikacyjny pracownika: ";
+    cin >> id;
+    while(cin.get() != '\n')
+        continue;
+
+}
+
+void Worker::Show()
+{
+    cout <<"Imie i naziwsko: "<<fullname<<"\n";
+    cout <<"Numer identyfikacyjny: "<<id<<"\n";
+
+}
+
+
+
+
+
 
 
 /*
